@@ -1,0 +1,74 @@
+
+entity Shop{
+	sId Long ,
+    login String required,
+    password String required,
+    name String
+}
+
+
+entity Items{
+	itemId Long,
+    createdBy Long required,
+    name String required,
+    createdOn Instant required,
+    totalPlacedCredits Long,
+    status Boolean required,
+    commission Double
+    
+}
+
+entity Options{
+	opId Long,
+    name String required,
+    ratio Double required,
+}
+
+entity Customer{
+	uId Long,
+    uLogin String required,
+    uPassword String required,
+    uTotalCredits Long required,
+    uPlacedCredits Long,
+    uGainedCredits Long,
+    uName String,
+    uContactInfo String,
+    createdOn Instant
+}
+
+entity Transaction{
+	tId Long,
+    placedCredits Long required,
+    placedOn Instant required
+}
+
+relationship OneToOne {
+	Items{finalOption} to Options,
+    Items{createdBy} to Shop
+}
+
+relationship OneToMany{
+	Items{options} to Options
+}
+
+relationship OneToMany{
+	Shop{customers} to Customer,
+    Shop{items} to Items
+}
+
+
+relationship OneToMany{
+	Customer{transactions} to Transaction
+}
+
+relationship OneToOne {
+	Transaction{placedBy} to Customer,
+    Transaction{option} to Options,
+    Transaction{item} to Items
+}
+
+
+
+
+
+
