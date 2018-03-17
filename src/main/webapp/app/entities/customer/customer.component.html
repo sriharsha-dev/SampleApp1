@@ -1,0 +1,80 @@
+<div>
+    <h2>
+        <span>Customers</span>
+        <button class="btn btn-primary float-right jh-create-entity create-customer" [routerLink]="['/', { outlets: { popup: ['customer-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Customer
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="customers">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>U Id</span></th>
+            <th><span>U Login</span></th>
+            <th><span>U Password</span></th>
+            <th><span>U Total Credits</span></th>
+            <th><span>U Placed Credits</span></th>
+            <th><span>U Gained Credits</span></th>
+            <th><span>U Name</span></th>
+            <th><span>U Contact Info</span></th>
+            <th><span>Created On</span></th>
+            <th><span>Shop</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let customer of customers ;trackBy: trackId">
+                <td><a [routerLink]="['../customer', customer.id ]">{{customer.id}}</a></td>
+                <td>{{customer.uId}}</td>
+                <td>{{customer.uLogin}}</td>
+                <td>{{customer.uPassword}}</td>
+                <td>{{customer.uTotalCredits}}</td>
+                <td>{{customer.uPlacedCredits}}</td>
+                <td>{{customer.uGainedCredits}}</td>
+                <td>{{customer.uName}}</td>
+                <td>{{customer.uContactInfo}}</td>
+                <td>{{customer.createdOn | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="customer.shop">
+                        <a [routerLink]="['../shop', customer.shop?.id ]" >{{customer.shop?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../customer', customer.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'customer/'+ customer.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'customer/'+ customer.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myOptionsLabel">Create or edit a Options</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!options.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="options.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_opId">Op Id</label>
+            <input type="number" class="form-control" name="opId" id="field_opId"
+                [(ngModel)]="options.opId" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                [(ngModel)]="options.name" required/>
+            <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.name?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_ratio">Ratio</label>
+            <input type="number" class="form-control" name="ratio" id="field_ratio"
+                [(ngModel)]="options.ratio" required/>
+            <div [hidden]="!(editForm.controls.ratio?.dirty && editForm.controls.ratio?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.ratio?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.ratio?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_items">Items</label>
+            <select class="form-control" id="field_items" name="items" [(ngModel)]="options.items" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="itemsOption.id === options.items?.id ? options.items : itemsOption" *ngFor="let itemsOption of items; trackBy: trackItemsById">{{itemsOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

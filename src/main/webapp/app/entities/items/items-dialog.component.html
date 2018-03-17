@@ -1,0 +1,115 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myItemsLabel">Create or edit a Items</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!items.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="items.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_itemId">Item Id</label>
+            <input type="number" class="form-control" name="itemId" id="field_itemId"
+                [(ngModel)]="items.itemId" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_createdBy">Created By</label>
+            <input type="number" class="form-control" name="createdBy" id="field_createdBy"
+                [(ngModel)]="items.createdBy" required/>
+            <div [hidden]="!(editForm.controls.createdBy?.dirty && editForm.controls.createdBy?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.createdBy?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.createdBy?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                [(ngModel)]="items.name" required/>
+            <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.name?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_createdOn">Created On</label>
+            <div class="d-flex">
+                <input id="field_createdOn" type="datetime-local" class="form-control" name="createdOn" [(ngModel)]="items.createdOn"
+                required/>
+            </div>
+            <div [hidden]="!(editForm.controls.createdOn?.dirty && editForm.controls.createdOn?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.createdOn?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.createdOn?.errors?.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_totalPlacedCredits">Total Placed Credits</label>
+            <input type="number" class="form-control" name="totalPlacedCredits" id="field_totalPlacedCredits"
+                [(ngModel)]="items.totalPlacedCredits" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_status">Status</label>
+            <input type="checkbox" class="form-control" name="status" id="field_status"
+                [(ngModel)]="items.status" />
+            <div [hidden]="!(editForm.controls.status?.dirty && editForm.controls.status?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.status?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_commission">Commission</label>
+            <input type="number" class="form-control" name="commission" id="field_commission"
+                [(ngModel)]="items.commission" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_shop">Shop</label>
+            <select class="form-control" id="field_shop" name="shop" [(ngModel)]="items.shop" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="shopOption.id === items.shop?.id ? items.shop : shopOption" *ngFor="let shopOption of shops; trackBy: trackShopById">{{shopOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_finalOption">Final Option</label>
+            <select class="form-control" id="field_finalOption" name="finalOption" [(ngModel)]="items.finalOption">
+                <option [ngValue]="null"></option>
+                <option [ngValue]="optionsOption.id === items.finalOption?.id ? items.finalOption : optionsOption" *ngFor="let optionsOption of finaloptions; trackBy: trackOptionsById">{{optionsOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_createdBy">Created By</label>
+            <select class="form-control" id="field_createdBy" name="createdBy" [(ngModel)]="items.createdBy">
+                <option [ngValue]="null"></option>
+                <option [ngValue]="shopOption.id === items.createdBy?.id ? items.createdBy : shopOption" *ngFor="let shopOption of createdbies; trackBy: trackShopById">{{shopOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

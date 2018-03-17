@@ -1,0 +1,58 @@
+
+<div *ngIf="transaction">
+    <h2><span>Transaction</span> {{transaction.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>T Id</span></dt>
+        <dd>
+            <span>{{transaction.tId}}</span>
+        </dd>
+        <dt><span>Placed Credits</span></dt>
+        <dd>
+            <span>{{transaction.placedCredits}}</span>
+        </dd>
+        <dt><span>Placed On</span></dt>
+        <dd>
+            <span>{{transaction.placedOn | date:'medium'}}</span>
+        </dd>
+        <dt><span>Customer</span></dt>
+        <dd>
+            <div *ngIf="transaction.customer">
+                <a [routerLink]="['/customer', transaction.customer?.id]">{{transaction.customer?.id}}</a>
+            </div>
+        </dd>
+        <dt><span>Placed By</span></dt>
+        <dd>
+            <div *ngIf="transaction.placedBy">
+                <a [routerLink]="['/customer', transaction.placedBy?.id]">{{transaction.placedBy?.id}}</a>
+            </div>
+        </dd>
+        <dt><span>Option</span></dt>
+        <dd>
+            <div *ngIf="transaction.option">
+                <a [routerLink]="['/options', transaction.option?.id]">{{transaction.option?.id}}</a>
+            </div>
+        </dd>
+        <dt><span>Item</span></dt>
+        <dd>
+            <div *ngIf="transaction.item">
+                <a [routerLink]="['/items', transaction.item?.id]">{{transaction.item?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'transaction/'+ transaction.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>
