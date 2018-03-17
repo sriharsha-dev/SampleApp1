@@ -1,0 +1,101 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myCustomerLabel">Create or edit a Customer</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!customer.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="customer.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_uId">U Id</label>
+            <input type="number" class="form-control" name="uId" id="field_uId"
+                [(ngModel)]="customer.uId" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_uLogin">U Login</label>
+            <input type="text" class="form-control" name="uLogin" id="field_uLogin"
+                [(ngModel)]="customer.uLogin" required/>
+            <div [hidden]="!(editForm.controls.uLogin?.dirty && editForm.controls.uLogin?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.uLogin?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_uPassword">U Password</label>
+            <input type="text" class="form-control" name="uPassword" id="field_uPassword"
+                [(ngModel)]="customer.uPassword" required/>
+            <div [hidden]="!(editForm.controls.uPassword?.dirty && editForm.controls.uPassword?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.uPassword?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_uTotalCredits">U Total Credits</label>
+            <input type="number" class="form-control" name="uTotalCredits" id="field_uTotalCredits"
+                [(ngModel)]="customer.uTotalCredits" required/>
+            <div [hidden]="!(editForm.controls.uTotalCredits?.dirty && editForm.controls.uTotalCredits?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.uTotalCredits?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.uTotalCredits?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_uPlacedCredits">U Placed Credits</label>
+            <input type="number" class="form-control" name="uPlacedCredits" id="field_uPlacedCredits"
+                [(ngModel)]="customer.uPlacedCredits" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_uGainedCredits">U Gained Credits</label>
+            <input type="number" class="form-control" name="uGainedCredits" id="field_uGainedCredits"
+                [(ngModel)]="customer.uGainedCredits" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_uName">U Name</label>
+            <input type="text" class="form-control" name="uName" id="field_uName"
+                [(ngModel)]="customer.uName" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_uContactInfo">U Contact Info</label>
+            <input type="text" class="form-control" name="uContactInfo" id="field_uContactInfo"
+                [(ngModel)]="customer.uContactInfo" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_createdOn">Created On</label>
+            <div class="d-flex">
+                <input id="field_createdOn" type="datetime-local" class="form-control" name="createdOn" [(ngModel)]="customer.createdOn"
+                />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_shop">Shop</label>
+            <select class="form-control" id="field_shop" name="shop" [(ngModel)]="customer.shop" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="shopOption.id === customer.shop?.id ? customer.shop : shopOption" *ngFor="let shopOption of shops; trackBy: trackShopById">{{shopOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

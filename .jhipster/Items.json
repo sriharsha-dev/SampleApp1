@@ -1,0 +1,81 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "shop",
+            "otherEntityName": "shop",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "finalOption",
+            "otherEntityName": "options",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "items"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "createdBy",
+            "otherEntityName": "shop",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "items"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "options",
+            "otherEntityName": "options",
+            "otherEntityRelationshipName": "items"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "itemId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "createdOn",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "totalPlacedCredits",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "commission",
+            "fieldType": "Double"
+        }
+    ],
+    "changelogDate": "20180317104800",
+    "entityTableName": "items",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

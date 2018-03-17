@@ -1,0 +1,70 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "shop",
+            "otherEntityName": "shop",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "transactions",
+            "otherEntityName": "transaction",
+            "otherEntityRelationshipName": "customer"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "uId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "uLogin",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "uPassword",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "uTotalCredits",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "uPlacedCredits",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "uGainedCredits",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "uName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "uContactInfo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdOn",
+            "fieldType": "Instant"
+        }
+    ],
+    "changelogDate": "20180317104802",
+    "entityTableName": "customer",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

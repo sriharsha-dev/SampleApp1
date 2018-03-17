@@ -1,0 +1,68 @@
+
+<div *ngIf="items">
+    <h2><span>Items</span> {{items.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Item Id</span></dt>
+        <dd>
+            <span>{{items.itemId}}</span>
+        </dd>
+        <dt><span>Created By</span></dt>
+        <dd>
+            <span>{{items.createdBy}}</span>
+        </dd>
+        <dt><span>Name</span></dt>
+        <dd>
+            <span>{{items.name}}</span>
+        </dd>
+        <dt><span>Created On</span></dt>
+        <dd>
+            <span>{{items.createdOn | date:'medium'}}</span>
+        </dd>
+        <dt><span>Total Placed Credits</span></dt>
+        <dd>
+            <span>{{items.totalPlacedCredits}}</span>
+        </dd>
+        <dt><span>Status</span></dt>
+        <dd>
+            <span>{{items.status}}</span>
+        </dd>
+        <dt><span>Commission</span></dt>
+        <dd>
+            <span>{{items.commission}}</span>
+        </dd>
+        <dt><span>Shop</span></dt>
+        <dd>
+            <div *ngIf="items.shop">
+                <a [routerLink]="['/shop', items.shop?.id]">{{items.shop?.id}}</a>
+            </div>
+        </dd>
+        <dt><span>Final Option</span></dt>
+        <dd>
+            <div *ngIf="items.finalOption">
+                <a [routerLink]="['/options', items.finalOption?.id]">{{items.finalOption?.id}}</a>
+            </div>
+        </dd>
+        <dt><span>Created By</span></dt>
+        <dd>
+            <div *ngIf="items.createdBy">
+                <a [routerLink]="['/shop', items.createdBy?.id]">{{items.createdBy?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'items/'+ items.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

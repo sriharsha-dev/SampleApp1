@@ -1,0 +1,64 @@
+
+<div *ngIf="customer">
+    <h2><span>Customer</span> {{customer.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>U Id</span></dt>
+        <dd>
+            <span>{{customer.uId}}</span>
+        </dd>
+        <dt><span>U Login</span></dt>
+        <dd>
+            <span>{{customer.uLogin}}</span>
+        </dd>
+        <dt><span>U Password</span></dt>
+        <dd>
+            <span>{{customer.uPassword}}</span>
+        </dd>
+        <dt><span>U Total Credits</span></dt>
+        <dd>
+            <span>{{customer.uTotalCredits}}</span>
+        </dd>
+        <dt><span>U Placed Credits</span></dt>
+        <dd>
+            <span>{{customer.uPlacedCredits}}</span>
+        </dd>
+        <dt><span>U Gained Credits</span></dt>
+        <dd>
+            <span>{{customer.uGainedCredits}}</span>
+        </dd>
+        <dt><span>U Name</span></dt>
+        <dd>
+            <span>{{customer.uName}}</span>
+        </dd>
+        <dt><span>U Contact Info</span></dt>
+        <dd>
+            <span>{{customer.uContactInfo}}</span>
+        </dd>
+        <dt><span>Created On</span></dt>
+        <dd>
+            <span>{{customer.createdOn | date:'medium'}}</span>
+        </dd>
+        <dt><span>Shop</span></dt>
+        <dd>
+            <div *ngIf="customer.shop">
+                <a [routerLink]="['/shop', customer.shop?.id]">{{customer.shop?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'customer/'+ customer.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>
